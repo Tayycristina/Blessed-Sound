@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blessed Sound - Início</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Blessed Sound</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <!-- Nome do App no topo e centralizado -->
-        <h1 class="app-title">Blessed Sound</h1>
-        
-        <!-- Barra de busca centralizada -->
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Buscar música...">
-            <button id="search-btn">Buscar</button>
-        </div>
-
-        <!-- Botão de login na tela inicial -->
-        <div class="buttons-container">
-            <a href="admin-login.html"><button class="login-btn">Login Administrador</button></a>
-        </div>
-
-        <h2>Músicas Cadastradas:</h2>
-        <ul id="lista-musicas"></ul>
+  <div class="container">
+    <h1>Blessed Sound</h1>
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Buscar música..." />
+      <button id="search-btn">Buscar</button>
     </div>
-    <script src="script.js"></script>
+    <ul id="resultados"></ul>
+    <button class="login-btn" onclick="window.location.href='admin-login.html'">Admin</button>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
