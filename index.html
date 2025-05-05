@@ -1,27 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blessed Sound</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Blessed Sound</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1 class="title">Blessed Sound</h1>
-        <button onclick="window.location.href='admin-login.html'">Login Admin</button>
-    </header>
-
-    <main>
-        <h2>Buscar Músicas</h2>
-        <input type="text" id="search" placeholder="Digite o nome da música ou cantor">
-        <button onclick="searchMusic()">Buscar</button>
-
-        <div id="music-list">
-            <!-- As músicas serão exibidas aqui -->
-        </div>
-    </main>
-
-    <script src="script.js"></script>
+  <header>
+    <h1 class="titulo">Blessed Sound</h1>
+    <a href="admin-login.html" class="admin-btn">Administrador</a>
+  </header>
+  <main>
+    <input type="text" id="busca" placeholder="Buscar por cantor ou música...">
+    <div id="resultados"></div>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
