@@ -37,6 +37,24 @@ document.getElementById("login-form")?.addEventListener("submit", async (e) => {
   }
 });
 
+// Validação falsa de login (sem backend)
+document.getElementById("login-form")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const cpf = document.getElementById("cpf").value;
+  const senha = document.getElementById("senha").value;
+
+  // CPF e senha fixos para simular o login
+  const CPF_VALIDO = "12345678900";
+  const SENHA_VALIDA = "1234";
+
+  if (cpf === CPF_VALIDO && senha === SENHA_VALIDA) {
+    window.location.href = "admin-panel.html";
+  } else {
+    alert("CPF ou senha incorretos.");
+  }
+});
+
 // Tela de cadastro
 document.getElementById("cadastro-form")?.addEventListener("submit", async (e) => {
   e.preventDefault();
