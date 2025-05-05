@@ -9,4 +9,26 @@ export default function handler(req, res) {
     } else {
         res.status(405).end(); // Método não permitido
     }
+    const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./database.db'); // Caminho do banco de dados SQLite
+
+export default function handler(req, res) {
+  if (req.method === 'POST') {
+    const { nome, cantor, letra } = req.body;
+
+    // Criação da tabela (caso não exista)
+    db.run('CREATE TABLE IF NOT EXISTS musicas (nome TEXT, cantor TEXT, letra TEXT)');
+
+    // Inserindo a música no banco de dados
+    db.run('INSERT INTO musicas (nome, cantor, letra) VALUES (?, ?, ?)', [nome, cantor, letra], function(err) {
+      if (err) {
+        return res.status(500).json({ mensagem: 'Erro ao cadastrar música' });
+      }
+      res.status(201).json({ mensagem: 'Música cadastrada com sucesso' });
+    });
+  } else {
+    res.status(405).json({ mensagem: 'Método não permitido' });
+  }
+}
+
 }
