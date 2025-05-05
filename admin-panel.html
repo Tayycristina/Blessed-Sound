@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Blessed Sound</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 class="title">Blessed Sound - Painel Admin</h1>
+        <button onclick="window.location.href='index.html'">Voltar</button>
+    </header>
+
+    <main>
+        <h2>Cadastrar Nova Música</h2>
+        <form id="add-music-form">
+            <input type="text" id="music-name" placeholder="Nome da Música" required>
+            <input type="text" id="singer-name" placeholder="Nome do Cantor" required>
+            <textarea id="lyrics" placeholder="Letra da Música" required></textarea>
+            <button type="submit">Cadastrar Música</button>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
