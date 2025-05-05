@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Música</title>
+    <title>Cadastrar Música - Blessed Sound</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Cadastrar Nova Música</h1>
+        
+        <!-- Formulário para cadastrar música -->
         <form id="form-musica">
             <label for="nome">Nome da Música:</label>
             <input type="text" id="nome" name="nome" required>
@@ -19,8 +21,13 @@
             <label for="letra">Letra da Música:</label>
             <textarea id="letra" name="letra" required></textarea>
 
-            <button type="submit">Cadastrar Música</button>
+            <div class="buttons-container">
+                <button type="submit">Cadastrar Música</button>
+                <button type="button" onclick="window.location.href='index.html'">Voltar</button>
+            </div>
         </form>
+
+        <!-- Seção de músicas cadastradas -->
         <div id="musicas-cadastradas">
             <h2>Musicas Cadastradas:</h2>
             <ul id="lista-musicas"></ul>
