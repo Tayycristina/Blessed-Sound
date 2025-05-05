@@ -1,27 +1,107 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 30px;
-  text-align: center;
+/* Resetando algumas configurações do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container principal */
+.container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Formulário */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label e input */
+label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 input, textarea {
-  width: 80%;
-  padding: 8px;
-  margin: 5px 0;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Estilo para os botões */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 button {
-  padding: 8px 16px;
-  margin: 5px;
-  cursor: pointer;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-#musicas, #musicasAdmin {
-  margin-top: 20px;
+button:hover {
+    background-color: #0056b3;
+}
+
+button[type="button"] {
+    background-color: #28a745;
+}
+
+button[type="button"]:hover {
+    background-color: #218838;
+}
+
+/* Lista de músicas cadastradas */
+#musicas-cadastradas {
+    margin-top: 30px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
