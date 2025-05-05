@@ -1,10 +1,12 @@
 export default function handler(req, res) {
-  if (req.method === 'POST') {
-    const { nome, cantor, letra } = req.body;
-    // Simulação do armazenamento no banco de dados (aqui você poderia conectar com SQLite)
-    console.log("Recebido:", nome, cantor, letra);
-    res.status(201).json({ mensagem: 'Música cadastrada com sucesso' });
-  } else {
-    res.status(405).json({ mensagem: 'Método não permitido' });
-  }
+    if (req.method === 'POST') {
+        const { usuario, senha } = req.body;
+        if (usuario === 'admin' && senha === '1234') {
+            res.status(200).json({ sucesso: true });
+        } else {
+            res.status(401).json({ sucesso: false });
+        }
+    } else {
+        res.status(405).end(); // Método não permitido
+    }
 }
