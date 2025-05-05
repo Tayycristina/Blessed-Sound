@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Blessed Sound</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1 class="titulo">Blessed Sound</h1>
-    <a class="btn-admin" href="admin-login.html">Admin</a>
+    <h1>Blessed Sound</h1>
+    <button onclick="window.location.href='admin-login.html'">Admin</button>
   </header>
+
   <main>
-    <input type="text" id="buscaInput" placeholder="Buscar por cantor ou música" />
+    <input type="text" id="searchInput" placeholder="Buscar por cantor ou música">
     <button onclick="buscarMusicas()">Buscar</button>
-    <div id="resultado"></div>
+
+    <div id="musicas"></div>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
