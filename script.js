@@ -1,65 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const busca = document.getElementById("busca");
-  const resultados = document.getElementById("resultados");
+const API_BASE = "http://localhost:8080";
 
-  if (busca) {
-    busca.addEventListener("input", async () => {
-      const query = busca.value;
-      const res = await fetch("http://localhost:8080/musicas?busca=" + query);
-      const musicas = await res.json();
+async function buscarMusicas() {
+  const busca = document.getElementById("buscaInput").value;
+  const res = await fetch(`${API_BASE}/musicas`);
+  const musicas = await res.json();
+  const resultado = document.getElementById("resultado");
+  resultado.innerHTML = "";
+  musicas.filter(m => m.nome.includes(busca) || m.cantor.includes(busca))
+         .forEach(m => resultado.innerHTML += `<p><strong>${m.nome}</strong> - ${m.cantor}<br/>${m.letra}</p>`);
+}
 
-      resultados.innerHTML = "";
-      musicas.forEach(musica => {
-        const div = document.createElement("div");
-        div.innerHTML = `<strong>${musica.cantor} - ${musica.nome}</strong><pre>${musica.letra}</pre>`;
-        resultados.appendChild(div);
-      });
-    });
+async function cadastrarMusica() {
+  const novaMusica = {
+    cantor: document.getElementById("cantor").value,
+    nome: document.getElementById("nome").value,
+    letra: document.getElementById("letra").value
+  };
+  const res = await fetch(`${API_BASE}/musicas`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(novaMusica)
+  });
+  if (res.ok) {
+    alert("Música cadastrada!");
+    location.reload();
+  } else {
+    alert("Erro ao cadastrar");
   }
+}
 
-  const cadastroForm = document.getElementById("cadastroForm");
-  if (cadastroForm) {
-    cadastroForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const cantor = document.getElementById("cantor").value;
-      const musica = document.getElementById("musica").value;
-      const letra = document.getElementById("letra").value;
-
-      try {
-        const res = await fetch("http://localhost:8080/musicas", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ cantor, nome: musica, letra })
-        });
-
-        if (res.ok) {
-          alert("Música cadastrada com sucesso!");
-          location.reload();
-        } else {
-          alert("Erro ao cadastrar música.");
-        }
-      } catch (err) {
-        alert("Erro ao conectar com o servidor.");
-      }
-    });
+async function deletarMusica(id) {
+  const res = await fetch(`${API_BASE}/musicas/${id}`, {
+    method: "DELETE"
+  });
+  if (res.ok) {
+    alert("Música deletada");
+    location.reload();
+  } else {
+    alert("Erro ao deletar");
   }
-
-  const listaMusicas = document.getElementById("listaMusicas");
-  if (listaMusicas) {
-    fetch("http://localhost:8080/musicas")
-      .then(res => res.json())
-      .then(musicas => {
-        musicas.forEach(m => {
-          const li = document.createElement("li");
-          li.innerHTML = `${m.cantor} - ${m.nome} <button onclick="deletarMusica(${m.id})">Excluir</button>`;
-          listaMusicas.appendChild(li);
-        });
-      });
-  }
-});
-
-function deletarMusica(id) {
-  fetch(`http://localhost:8080/musicas/${id}`, { method: "DELETE" })
-    .then(() => location.reload())
-    .catch(() => alert("Erro ao deletar música."));
 }
