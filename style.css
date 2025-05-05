@@ -1,8 +1,27 @@
-body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f0f0f0; }
-header { background: #333; color: white; padding: 1rem; text-align: center; position: relative; }
-.titulo { margin: 0; font-size: 2rem; }
-.btn-admin { position: absolute; top: 1rem; right: 1rem; background: #fff; color: #333; padding: 0.5rem; text-decoration: none; }
-main { padding: 2rem; }
-input, textarea { display: block; margin: 1rem 0; padding: 0.5rem; width: 100%; max-width: 500px; }
-button { padding: 0.5rem 1rem; margin-right: 1rem; }
-#resultado, #musicas { margin-top: 2rem; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 30px;
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input, textarea {
+  width: 80%;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+button {
+  padding: 8px 16px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#musicas, #musicasAdmin {
+  margin-top: 20px;
+}
