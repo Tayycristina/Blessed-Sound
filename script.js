@@ -1,77 +1,74 @@
-const API_BASE = "http://localhost:8080";
+// Voltar para tela inicial
+function voltarInicio() {
+  window.location.href = "index.html";
+}
 
-// Tela de busca
-document.getElementById("search-btn")?.addEventListener("click", async () => {
-  const termo = document.getElementById("search").value;
-  const res = await fetch(`${API_BASE}/musicas`);
-  const musicas = await res.json();
-  const filtradas = musicas.filter(m => 
-    m.nomeMusica.toLowerCase().includes(termo.toLowerCase()) || 
-    m.nomeCantor.toLowerCase().includes(termo.toLowerCase())
-  );
-  const ul = document.getElementById("resultados");
-  ul.innerHTML = "";
-  filtradas.forEach(m => {
-    const li = document.createElement("li");
-    li.innerText = `${m.nomeCantor} - ${m.nomeMusica}`;
-    ul.appendChild(li);
-  });
-});
+// Exibir músicas na tela inicial
+window.onload = function () {
+  const lista = JSON.parse(localStorage.getItem("musicas")) || [];
+  const container = document.getElementById("lista-musicas");
 
-// Tela de login
-document.getElementById("login-form")?.addEventListener("submit", async (e) => {
+  if (container) {
+    container.innerHTML = "";
+    lista.forEach((m) => {
+      const item = document.createElement("li");
+      item.innerHTML = `<strong>${m.musica}</strong> - ${m.cantor}<br>${m.letra}`;
+      container.appendChild(item);
+    });
+  }
+};
+
+// Login simulado (sem backend)
+document.getElementById("login-form")?.addEventListener("submit", function (e) {
   e.preventDefault();
+
   const cpf = document.getElementById("cpf").value;
   const senha = document.getElementById("senha").value;
 
-  const res = await fetch(`${API_BASE}/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ cpf, senha })
-  });
-
-  if (res.ok) {
+  if (cpf === "12345678900" && senha === "admin") {
     window.location.href = "admin-panel.html";
   } else {
     alert("CPF ou senha incorretos.");
   }
 });
 
-// Validação falsa de login (sem backend)
-document.getElementById("login-form")?.addEventListener("submit", (e) => {
+// Cadastro de música (salva no localStorage)
+document.getElementById("cadastro-form")?.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const cpf = document.getElementById("cpf").value;
-  const senha = document.getElementById("senha").value;
-
-  // CPF e senha fixos para simular o login
-  const CPF_VALIDO = "12345678900";
-  const SENHA_VALIDA = "1234";
-
-  if (cpf === CPF_VALIDO && senha === SENHA_VALIDA) {
-    window.location.href = "admin-panel.html";
-  } else {
-    alert("CPF ou senha incorretos.");
-  }
-});
-
-// Tela de cadastro
-document.getElementById("cadastro-form")?.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const nomeCantor = document.getElementById("nomeCantor").value;
-  const nomeMusica = document.getElementById("nomeMusica").value;
+  const cantor = document.getElementById("nomeCantor").value;
+  const musica = document.getElementById("nomeMusica").value;
   const letra = document.getElementById("letra").value;
 
-  const res = await fetch(`${API_BASE}/musicas`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nomeCantor, nomeMusica, letra })
-  });
+  if (cantor && musica && letra) {
+    const lista = JSON.parse(localStorage.getItem("musicas")) || [];
+    lista.push({ cantor, musica, letra });
+    localStorage.setItem("musicas", JSON.stringify(lista));
 
-  if (res.ok) {
-    alert("Música cadastrada!");
+    alert("Música cadastrada com sucesso!");
     document.getElementById("cadastro-form").reset();
   } else {
-    alert("Erro ao cadastrar a música.");
+    alert("Preencha todos os campos!");
+  }
+});
+
+// Busca
+document.getElementById("search-btn")?.addEventListener("click", () => {
+  const termo = document.getElementById("search").value.toLowerCase();
+  const lista = JSON.parse(localStorage.getItem("musicas")) || [];
+  const container = document.getElementById("lista-musicas");
+
+  if (container) {
+    container.innerHTML = "";
+    lista
+      .filter((m) =>
+        m.cantor.toLowerCase().includes(termo) ||
+        m.musica.toLowerCase().includes(termo)
+      )
+      .forEach((m) => {
+        const item = document.createElement("li");
+        item.innerHTML = `<strong>${m.musica}</strong> - ${m.cantor}<br>${m.letra}`;
+        container.appendChild(item);
+      });
   }
 });
