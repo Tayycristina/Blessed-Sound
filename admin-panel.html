@@ -12,14 +12,9 @@
         
         <!-- Formulário para cadastrar música -->
         <form id="form-musica">
-            <label for="nome">Nome da Música:</label>
-            <input type="text" id="nome" name="nome" required>
-
-            <label for="cantor">Nome do Cantor:</label>
-            <input type="text" id="cantor" name="cantor" required>
-
-            <label for="letra">Letra da Música:</label>
-            <textarea id="letra" name="letra" required></textarea>
+            <input type="text" id="nome" placeholder="Nome da Música" required>
+            <input type="text" id="cantor" placeholder="Nome do Cantor" required>
+            <textarea id="letra" placeholder="Letra da Música" required></textarea>
 
             <div class="buttons-container">
                 <button type="submit">Cadastrar Música</button>
@@ -27,11 +22,8 @@
             </div>
         </form>
 
-        <!-- Seção de músicas cadastradas -->
-        <div id="musicas-cadastradas">
-            <h2>Musicas Cadastradas:</h2>
-            <ul id="lista-musicas"></ul>
-        </div>
+        <h2>Musicas Cadastradas:</h2>
+        <ul id="lista-musicas"></ul>
     </div>
     <script src="script.js"></script>
 </body>
