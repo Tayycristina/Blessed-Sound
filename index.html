@@ -8,12 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Blessed Sound - Músicas</h1>
+        <!-- Nome do App no topo -->
+        <h1>Blessed Sound</h1>
         
-        <div class="buttons-container">
-            <a href="admin-login.html"><button>Login Administrador</button></a>
+        <!-- Barra de busca centralizada -->
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar música...">
+            <button id="search-btn">Buscar</button>
         </div>
-        
+
+        <!-- Botão de login na tela inicial -->
+        <div class="buttons-container">
+            <a href="admin-login.html"><button class="login-btn">Login Administrador</button></a>
+        </div>
+
         <h2>Músicas Cadastradas:</h2>
         <ul id="lista-musicas"></ul>
     </div>
