@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Cadastrar Músicas</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Cadastrar Música - Blessed Sound</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Cadastrar Música</h1>
+    <h1>Cadastrar Nova Música</h1>
     <form id="cadastro-form">
-      <input type="text" id="nomeCantor" placeholder="Nome do Cantor" required />
-      <input type="text" id="nomeMusica" placeholder="Nome da Música" required />
+      <input type="text" id="nomeCantor" placeholder="Nome do Cantor" required>
+      <input type="text" id="nomeMusica" placeholder="Nome da Música" required>
       <textarea id="letra" placeholder="Letra da Música" required></textarea>
       <div class="buttons-container">
-        <button type="button" onclick="window.location.href='index.html'">Voltar</button>
         <button type="submit">Cadastrar</button>
+        <button type="button" onclick="voltarInicio()">Voltar</button>
       </div>
     </form>
   </div>
