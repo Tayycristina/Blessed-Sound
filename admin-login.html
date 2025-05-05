@@ -1,20 +1,33 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <title>Login Administrador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main>
-    <h2>Login do Administrador</h2>
-    <form id="loginForm">
-      <input type="text" id="cpf" placeholder="CPF" required>
-      <input type="password" id="senha" placeholder="Senha" required>
-      <button type="submit">Entrar</button>
-    </form>
-    <p id="mensagemErro"></p>
+    <h2>Login de Administrador</h2>
+    <input type="text" id="cpf" placeholder="CPF" />
+    <input type="password" id="senha" placeholder="Senha" />
+    <button onclick="loginAdmin()">Entrar</button>
   </main>
-  <script src="login.js"></script>
+  <script>
+    async function loginAdmin() {
+      const cpf = document.getElementById("cpf").value;
+      const senha = document.getElementById("senha").value;
+      const res = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cpf, senha })
+      });
+      if (res.ok) {
+        window.location.href = "admin-panel.html";
+      } else {
+        alert("Login falhou");
+      }
+    }
+  </script>
 </body>
 </html>
