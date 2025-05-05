@@ -1,82 +1,65 @@
-// Função de busca de músicas
-function searchMusic() {
-    const searchQuery = document.getElementById('search').value;
-    const musicList = document.getElementById('music-list');
+document.addEventListener("DOMContentLoaded", () => {
+  const busca = document.getElementById("busca");
+  const resultados = document.getElementById("resultados");
 
-    // Aqui você pode fazer uma requisição ao backend para buscar as músicas
-    // Por exemplo:
-    fetch(`https://seu-backend.com/api/search?query=${searchQuery}`)
-        .then(response => response.json())
-        .then(data => {
-            musicList.innerHTML = ''; // Limpa a lista atual
-            data.musicas.forEach(musica => {
-                const musicItem = document.createElement('div');
-                musicItem.textContent = `${musica.nome} - ${musica.cantor}`;
-                musicList.appendChild(musicItem);
-            });
-        });
-}
+  if (busca) {
+    busca.addEventListener("input", async () => {
+      const query = busca.value;
+      const res = await fetch("http://localhost:8080/musicas?busca=" + query);
+      const musicas = await res.json();
 
-document.getElementById("loginForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const cpf = document.getElementById("cpf").value;
-  const senha = document.getElementById("senha").value;
-
-  try {
-    const response = await fetch("http://localhost:8080/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cpf, senha }),
+      resultados.innerHTML = "";
+      musicas.forEach(musica => {
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${musica.cantor} - ${musica.nome}</strong><pre>${musica.letra}</pre>`;
+        resultados.appendChild(div);
+      });
     });
+  }
 
-    if (response.ok) {
-      window.location.href = "admin-panel.html";
-    } else {
-      document.getElementById("mensagemErro").textContent = "Login inválido.";
-    }
-  } catch (error) {
-    document.getElementById("mensagemErro").textContent = "Erro de conexão com o servidor.";
+  const cadastroForm = document.getElementById("cadastroForm");
+  if (cadastroForm) {
+    cadastroForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const cantor = document.getElementById("cantor").value;
+      const musica = document.getElementById("musica").value;
+      const letra = document.getElementById("letra").value;
+
+      try {
+        const res = await fetch("http://localhost:8080/musicas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cantor, nome: musica, letra })
+        });
+
+        if (res.ok) {
+          alert("Música cadastrada com sucesso!");
+          location.reload();
+        } else {
+          alert("Erro ao cadastrar música.");
+        }
+      } catch (err) {
+        alert("Erro ao conectar com o servidor.");
+      }
+    });
+  }
+
+  const listaMusicas = document.getElementById("listaMusicas");
+  if (listaMusicas) {
+    fetch("http://localhost:8080/musicas")
+      .then(res => res.json())
+      .then(musicas => {
+        musicas.forEach(m => {
+          const li = document.createElement("li");
+          li.innerHTML = `${m.cantor} - ${m.nome} <button onclick="deletarMusica(${m.id})">Excluir</button>`;
+          listaMusicas.appendChild(li);
+        });
+      });
   }
 });
 
-// Função de login
-document.getElementById('login-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const cpf = document.getElementById('cpf').value;
-    const senha = document.getElementById('senha').value;
-
-    // Verificar as credenciais do login
-    fetch('https://seu-backend.com/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cpf, senha })
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.sucesso) {
-                window.location.href = 'admin-panel.html'; // Redireciona para o painel admin
-            } else {
-                alert('Credenciais inválidas');
-            }
-        });
-});
-
-// Função para cadastrar música
-document.getElementById('add-music-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const nome = document.getElementById('music-name').value;
-    const cantor = document.getElementById('singer-name').value;
-    const letra = document.getElementById('lyrics').value;
-
-    // Enviar dados para o backend
-    fetch('https://seu-backend.com/api/musicas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, cantor, letra })
-    })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.mensagem);
-        });
-});
+function deletarMusica(id) {
+  fetch(`http://localhost:8080/musicas/${id}`, { method: "DELETE" })
+    .then(() => location.reload())
+    .catch(() => alert("Erro ao deletar música."));
+}
