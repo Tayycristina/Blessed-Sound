@@ -35,6 +35,9 @@ document.getElementById("form-musica").addEventListener("submit", function(event
 
     // Recarrega a lista de músicas
     carregarMusicas();
+
+    // Redireciona para a página inicial
+    window.location.href = "index.html";
   } else {
     alert("Por favor, preencha todos os campos.");
   }
